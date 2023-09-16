@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+	<html>	
+		<head>
+			<title>BAR COde GEnerator</title>
+			<style>
+				
+
+				.container{
+					position:absolute;
+					top:50%;
+					left:50%;
+					transform: translate(-50%,-50%);
+				}
+				section{
+					min-height: 200px;
+					background: #8DDFCB;
+					padding:20px;
+					border-radius: 10px;
+					transition:3s;
+				}
+				section>p{
+					font-size: 2rem;
+					font-family: arial;
+				}
+				section>input{
+					display:block;
+					border:1px solid #222;
+					outline: 0;
+					padding:5px 10px;
+					margin:10px auto;
+					font-size: 1.2rem;
+					border-radius:5px;
+				}
+				button{
+					display: block;
+					padding:9px 4px;
+					margin:0 auto;
+					background-color: aqua;
+					border:1px solid #222;
+					border-radius: 4px;
+					outline:none;
+
+				}
+				.img_block{
+					margin:20px;
+					display: flex;
+					justify-content: center;
+					max-height: 0px;
+					overflow: hidden;
+					transition: max-height ease 1.5s;
+				}
+				.img_block.show{
+					max-height: 300px;
+				}
+
+				.img{
+					padding:10px;
+					border:1px solid #333;
+					border-radius: 10px;
+				}
+
+				@keyframes shake {
+					0%   {transform: translateX(0px);
+					border:4px solid rgb(210, 89, 89);}
+					25%  {transform: translateX(-2px);
+						border:4px solid rgb(192, 173, 63);}
+					50%  {transform: translateX(0px);
+						border:4px solid rgb(57, 94, 40);}
+					75% {transform: translateX(2px);
+						border:4px solid rgb(18, 90, 119);}
+					100% {transform: translateX(0px);
+						border:4px solid rgb(184, 10, 203);}
+
+				}
+
+					/* The element to apply the animation to */
+				.shak {
+
+					animation-name: shake;
+					animation-duration: 0.4s;
+				}
+			</style>
+		</head>
+		<body>
+			<div class="container">
+				<section>
+					<p>Generate your QR Code here</p>
+					<input type="text" id="text" class="text" name="text" placeholder="Enter either URL or TEXT">
+					<div class="img_block">
+						<img class="img" alt="">
+					</div>
+					<button class="click" onclick="genQR()">Generate</button>
+				</section>
+			</div>
+
+			<script>
+				let src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=";
+				let qrtext=document.getElementById("text");
+				let imgBox=document.querySelector(".img_block");
+				let img=document.querySelector(".img");
+				let btn=document.querySelector(".click");
+				
+				function genQR(){
+						if(qrtext.value){
+							console.log("hello");
+							img.src=src+qrtext.value;
+							imgBox.classList.add('show');
+						}else{
+							qrtext.classList.add('shak');
+
+						}
+					}
+					
+			</script>
+		</body>
+	</html>
